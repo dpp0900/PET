@@ -2,12 +2,13 @@ from scapy.all import sniff, wrpcap, PcapWriter
 import socket
 import os
 
-# 캡쳐 파일 저장 디렉토리 생성
 current_dir = os.getcwd()
 captures_dir = os.path.join(current_dir, "Captures")
 os.makedirs(captures_dir, exist_ok=True)
 
 output_file_path = os.path.join(captures_dir, "capture.pcap")
+
+host_port = 7777
 
 def packet_scanner():
     print("Starting packet capture...")
@@ -26,10 +27,11 @@ def packet_scanner():
     print(f"Capture saved as {output_file_path}")
 
 def upload_file():
+    global host_port
+
     print("Uploading Result file...")
 
-    host_ip = '1.224.116.103'
-    host_port = 7777
+    host_ip = '192.168.0.158'
     print(f"Host IP: {host_ip}, Host Port: {host_port}")
     
     # 소켓 생성
@@ -47,6 +49,11 @@ def upload_file():
 
     print("File sent successfully.")
     s.close()
+
+    if host_port == 7777:
+        host_port += 1
+    elif host_port == 7778:
+        host_port -= 1
 
 if __name__ == '__main__':
     while True:
