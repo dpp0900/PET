@@ -14,7 +14,7 @@ def packet_scanner():
     print("Starting packet capture...")
 
     # 패킷 캡처 필터
-    filter = "http || icmp"
+    filter = "tcp port 80"
 
     # 패킷 캡처 시작
     output_tmp_file_path = os.path.join(captures_dir, "capture_tmp.pcap")
