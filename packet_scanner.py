@@ -1,5 +1,6 @@
 import socket
 import os
+import subprocess
 
 current_dir = os.getcwd()
 captures_dir = os.path.join(current_dir, "Captures")
@@ -18,10 +19,10 @@ def packet_scanner():
     # 패킷 캡처 시작
     output_tmp_file_path = os.path.join(captures_dir, "capture_tmp.pcap")
     command = f"tshark -i eth0 -f '{filter}' -c 1 -w {output_tmp_file_path} -F pcap"
-    os.system(command)
+    subprocess.Popen(command, shell=True)
 
     merge_command = f"mergecap -a -w {output_file_path} {output_tmp_file_path}"
-    os.system(merge_command)
+    subprocess.Popen(merge_command, shell=True)
 
     os.remove(output_tmp_file_path)
     # 캡처한 패킷을 파일로 저장
