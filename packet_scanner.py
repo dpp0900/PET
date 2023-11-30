@@ -19,10 +19,12 @@ def packet_scanner():
     # 패킷 캡처 시작
     output_tmp_file_path = os.path.join(captures_dir, "capture_tmp.pcap")
     command = f"tshark -i eth0 -f '{filter}' -c 1 -w {output_tmp_file_path} -F pcap"
-    subprocess.Popen(command, shell=True)
+    p = subprocess.Popen(command, shell=True)
+    p.wait()
 
     merge_command = f"mergecap -a -w {output_file_path} {output_tmp_file_path}"
-    subprocess.Popen(merge_command, shell=True)
+    p = subprocess.Popen(merge_command, shell=True)
+    p.wait()
 
     os.remove(output_tmp_file_path)
     # 캡처한 패킷을 파일로 저장
