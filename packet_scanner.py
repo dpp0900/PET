@@ -35,7 +35,7 @@ def upload_file():
 
     print("Uploading Result file...")
 
-    host_ip = '192.168.0.158'
+    host_ip = '192.168.0.23'
     print(f"Host IP: {host_ip}, Host Port: {host_port}")
     
     # 소켓 생성
