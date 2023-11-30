@@ -3,7 +3,7 @@ import os
 import subprocess
 
 current_dir = os.getcwd()
-captures_dir = os.path.join(current_dir, "Captures")
+captures_dir = os.path.realpath("/tmp/captures")
 os.makedirs(captures_dir, exist_ok=True)
 
 output_file_path = os.path.join(captures_dir, "capture.pcap")
