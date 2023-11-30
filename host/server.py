@@ -1,9 +1,7 @@
-from flask import Flask, send_from_directory, render_template
 import socket
-import asyncio
 import os
 
-FILES_DIRECTORY = '/home/kch3d/Desktop/tshark/host/uploads/'
+FILES_DIRECTORY = './uploads/'
 
 def receive_file():
     server_ip = '0.0.0.0'  # Listen on all interfaces
