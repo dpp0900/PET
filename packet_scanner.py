@@ -62,4 +62,3 @@ def packet_scanner():
 if __name__ == '__main__':
     while True:
         packet_scanner()
-        upload_file()
