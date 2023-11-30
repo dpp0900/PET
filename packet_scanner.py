@@ -4,7 +4,6 @@ import subprocess
 
 current_dir = os.getcwd()
 captures_dir = os.path.join(current_dir, "server")
-os.makedirs(captures_dir, exist_ok=True)
 
 output_file_path = os.path.join(captures_dir, "capture.pcap")
 
