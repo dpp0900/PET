@@ -1,4 +1,3 @@
-from scapy.all import sniff, wrpcap, PcapWriter
 import socket
 import os
 
@@ -14,16 +13,18 @@ def packet_scanner():
     print("Starting packet capture...")
 
     # 패킷 캡처 필터
-    bpf_filter = 'tcp port (http or ftp or telnet or smtp or imap) or icmp'
+    filter = "http || icmp"
 
     # 패킷 캡처 시작
-    packets = sniff(filter=bpf_filter, count=10, iface="wlan0")
+    output_tmp_file_path = os.path.join(captures_dir, "capture_tmp.pcap")
+    command = f"tshark -i eth0 -f '{filter}' -c 1 -w {output_tmp_file_path} -F pcap"
+    os.system(command)
 
+    merge_command = f"mergecap -a -w {output_file_path} {output_tmp_file_path}"
+    os.system(merge_command)
+
+    os.remove(output_tmp_file_path)
     # 캡처한 패킷을 파일로 저장
-    pcap_writer = PcapWriter(output_file_path, append=True, sync=True)
-    pcap_writer.write(packets)
-    pcap_writer.flush()
-    pcap_writer.close()
     print(f"Capture saved as {output_file_path}")
 
 def upload_file():
